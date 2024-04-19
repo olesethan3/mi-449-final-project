@@ -5,10 +5,10 @@ import './App.css';
 function Dorms(){
   const [dormInfo, setMyDorms] = useState([]);
   async function getDorms() {
-    let { data: DormData, error } = await supabase
-      .from('DormData')
+    let { data: dormdata, error } = await supabase
+      .from('dormdata')
       .select('*')
-    setMyDorms(DormData);
+    setMyDorms(dormdata);
   }
   getDorms()
   return (
@@ -16,9 +16,9 @@ function Dorms(){
       {
         dormInfo.map(d => {
           <tr>
-            <td>{d.Name}</td>
-            <td>{d.Neighborhood}</td>
-            <td>{d.Floors}</td>
+            <td>{d.name}</td>
+            <td>{d.neighborhood}</td>
+            <td>{d.year}</td>
           </tr>
         })
       }
@@ -28,7 +28,10 @@ function Dorms(){
 
 function App() {
   return (
+    <>
+    <p>Hello</p>
     <Dorms />
+    </>
   );
 }
 export default App;
