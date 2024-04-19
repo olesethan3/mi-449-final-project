@@ -1,37 +1,42 @@
 import { useState } from 'react';
-import { supabase } from './supbaseClient';
+import { supabase } from './supabaseClient';
 import './App.css';
 
-function Dorms(){
+function Dorms() {
   const [dormInfo, setMyDorms] = useState([]);
-  async function getDorms() {
-    let { data: dormdata, error } = await supabase
+
+  useState(() => {
+    async function getDorms() {
+      let { data: dormdata } = await supabase
       .from('dormdata')
-      .select('*')
-    setMyDorms(dormdata);
-  }
-  getDorms()
+      .select('*');
+      setMyDorms(dormdata);
+    }
+    getDorms();
+  }, []);
+
   return (
     <table>
-      {
-        dormInfo.map(d => {
-          <tr>
+      <tbody>
+        {dormInfo.map(d => (
+          <tr key={d.id}>
             <td>{d.name}</td>
             <td>{d.neighborhood}</td>
             <td>{d.year}</td>
           </tr>
-        })
-      }
+        ))}
+      </tbody>
     </table>
-  )
+  );
 }
 
 function App() {
   return (
     <>
-    <p>Hello</p>
-    <Dorms />
+      <p>Hello</p>
+      <Dorms />
     </>
   );
 }
+
 export default App;
