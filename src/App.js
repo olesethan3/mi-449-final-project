@@ -186,17 +186,14 @@ function Dorms() {
 
 function NewUser() {
   const [email, newEmail] = useState('');
-  const [password, newPassword] = useState('');
 
   const emailAdded = (event) => {
     newEmail(event.target.value);
   };
 
-  const passwordAdded = (event) => {
-    newPassword(event.target.value);
-  };
-
   const userAdded = async () => {
+      const password = 'placeholder'
+
       await supabase.auth.signUp({
         email,
         password,
@@ -208,8 +205,6 @@ function NewUser() {
       <p className='font-bold text-lg text-msu-color mb-5'>Join The Mailing List:</p>
       <input type='email' value={email} onChange={emailAdded}
       placeholder="Enter your email" />
-      <input type='password' value={password} onChange={passwordAdded}
-      placeholder="Enter a password" />
       <button className=' w-20 h-8 bg-green-800 text-white hover:scale-125 transition duration-150 ease-in-out mb-10' onClick={userAdded}>Sign Up</button>
     </div>
   );
